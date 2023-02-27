@@ -5,7 +5,7 @@ import isAuth from "./middleware/isAuth.js";
 import * as userController from './controllers/userController.js'
 import * as postController from './controllers/postController.js'
 import {multerStorage} from "./multerStorage/multerStorage.js";
-
+import cors from 'cors'
 
 connectDB()
 
@@ -14,6 +14,7 @@ const upload = multerStorage()
 
 
 app.use(express.json())
+app.use(cors())
 app.use('/uploads',express.static('uploads'));
 
 app.post('/upload', isAuth, upload.single("image"), (req,res) => {
